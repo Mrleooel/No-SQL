@@ -1,0 +1,231 @@
+/* 基础样式重置和变量定义 */
+:root {
+  --primary-color: #3b82f6;    /* 蓝色主色调 */
+  --secondary-color: #64748b;  /* 次要颜色 */
+  --accent-color: #f97316;     /* 强调色（橙色） */
+  --dark-color: #1e293b;       /* 深色文本 */
+  --light-color: #f8fafc;      /* 浅色背景 */
+  --border-radius: 0.5rem;     /* 圆角大小 */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);     /* 小阴影 */
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);     /* 中等阴影 */
+  --transition: all 0.3s ease; /* 过渡动画 */
+}
+
+/* 全局样式 */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* 导航栏样式 */
+nav {
+  background-color: #fff;
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+nav a:hover {
+  background-color: #f1f5f9;
+  color: var(--primary-color);
+}
+
+nav a.active {
+  color: var(--primary-color);
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+/* 消息提示样式 */
+.flash {
+  padding: 0.75rem 1.25rem;
+  margin: 1rem auto;
+  border-radius: var(--border-radius);
+  max-width: 800px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.flash.success {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.flash.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.flash.info {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+/* 主要内容区域样式 */
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-color);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* 表单样式 */
+form {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--dark-color);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+button,
+input[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 链接样式 */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  nav {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  nav a {
+    margin-bottom: 0.5rem;
+  }
+
+  main {
+    margin-top: 1rem;
+  }
+}
+
+
+
+
+
+/* 登录页面容器居中 */
+.login-container {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 确保页面高度支撑垂直居中 */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* 优化表单内部布局 */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-control {
+  width: 100%;
+  max-width: 300px;
+}

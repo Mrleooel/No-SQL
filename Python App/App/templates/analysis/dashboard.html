@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="max-width: 700px; margin: 0 auto 30px;">
+        {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    {% if message %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert" style="max-width: 700px; margin: 0 auto 30px;">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    {% if chart_image %}
+    <div class="card mx-auto mb-5" style="max-width: 700px; border-radius: 12px; overflow: hidden;">
+        <div class="card-header bg-light fw-semibold p-3" style="border-bottom: 1px solid #eee;">
+            数据可视化图表
+        </div>
+        <div class="card-body text-center p-4">
+            <img src="{{ chart_image }}" class="img-fluid rounded-2" style="max-width: 100%; max-height: 500px; object-fit: cover;">
+        </div>
+    </div>
+    {% endif %}
+
+    {% if post_stats %}
+    <div class="card mx-auto" style="max-width: 700px; border-radius: 12px; overflow: hidden;">
+        <div class="card-header bg-gradient-light fw-semibold p-3" style="border-bottom: 1px solid #eee; color: #495057;">
+            用户发帖量统计
+        </div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped align-middle" style="min-width: 600px;">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="border-top-left-radius: 8px;">用户ID</th>
+                            <th>用户名</th>
+                            <th style="border-top-right-radius: 8px;">发帖量</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stat in post_stats %}
+                        <tr>
+                            <td>{{ stat.user_id }}</td>
+                            <td>{{ stat.username }}</td>
+                            <td>{{ stat.count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    body {
+        background-color: #f9fafb;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+    }
+
+    .bg-gradient-light {
+        background: linear-gradient(135deg, #fdfdfd 0%, #f8f9fa 100%);
+    }
+
+    .alert {
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .table {
+        --bs-table-hover-bg: #f7f8fa;
+    }
+
+    .table thead {
+        background-color: #f1f3f5;
+    }
+
+    .table th,
+    .table td {
+        vertical-align: middle;
+        border-color: #eee;
+    }
+
+    @media (max-width: 768px) {
+        .card,
+        .alert {
+            max-width: 90% !important;
+        }
+
+        .table {
+            min-width: auto;
+        }
+    }
+</style>
+{% endblock %}

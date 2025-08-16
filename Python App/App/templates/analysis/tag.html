@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forum.css') }}">
+{% endblock %}
+{% block content %}
+<div class="tag-header">
+    <h2>标签分析：{{ tag_name }}</h2>
+    <div class="tag-metrics">
+        <div class="metric">
+            <div class="metric-value">{{ post_count }}</div>
+            <div class="metric-label">相关帖子</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">{{ avg_views }}</div>
+            <div class="metric-label">平均浏览量</div>
+        </div>
+    </div>
+</div>
+{% if posts %}
+    <h3>相关帖子</h3>
+    <ul class="related-posts">
+        {% for post in posts %}
+        <li>
+            <a href="#">{{ post.title }}</a>
+            <span class="views">{{ post.views }}次浏览</span>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="empty-state">
+        <p>此标签下暂无帖子</p>
+    </div>
+{% endif %}
+<a href="{{ url_for('analysis.dashboard') }}" class="btn">返回仪表盘</a>
+{% endblock %}

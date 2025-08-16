@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Forum{% endblock %}</title>
+        <!-- 只在非论坛页面加载 base.css -->
+    {% if not request.path.startswith('/forum') %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% endif %}
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">-->
+        <!-- 论坛页面使用 Tailwind CSS -->
+    {% if request.path.startswith('/forum') %}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    {% endif %}
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav class="bg-white fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="{{ url_for('forum.index') }}" class="text-lg font-medium text-neutral-800 hover:text-primary transition-colors">
+                <i class="fa fa-home mr-1"></i> Home
+            </a>
+            <a href="{{ url_for('analysis.dashboard') }}" class="text-lg font-medium text-neutral-700 hover:text-primary transition-colors">
+                <i class="fa fa-bar-chart mr-1"></i> Analytics
+            </a>
+            <a href="{{ url_for('auth.login') }}" class="text-lg font-medium text-neutral-700 hover:text-primary transition-colors">
+                <i class="fa fa-user mr-1"></i> Login
+            </a>
+        </div>
+    </nav>
+    {% for message in get_flashed_messages() %}
+        <div class="flash bg-primary/10 border-l-4 border-primary text-primary p-4 mt-16 mb-8 rounded-r-lg">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</body>
+</html>
